@@ -6,7 +6,8 @@ class SessionsController < ApplicationController
         @user = User.find_by({"email" => params["email"] })
         if @user
         #if they do, check they know their passwords
-            if params["password"] == @user ["password"]
+            #if params["password"] == @user ["password"]
+            if BCrypt::Password.create(params["user"]["password"]) == params["password"]
             #if they do, send them in
             redirect_to "/companies"   
             else
